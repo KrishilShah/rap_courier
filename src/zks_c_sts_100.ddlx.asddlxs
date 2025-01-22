@@ -1,0 +1,58 @@
+@Metadata.layer: #PARTNER
+
+@UI.headerInfo: {
+typeName: 'Courier Status',
+typeNamePlural: 'Courier Status',
+
+title:{
+type: #STANDARD,
+value: 'Stats'},
+
+description: {
+type: #STANDARD,
+value: 'TrackingID'
+
+}
+}
+annotate entity ZKS_C_STS_100
+    with 
+{
+    @UI.facet: [
+  { id:'TrackingID',
+  purpose:         #STANDARD,
+  type:            #IDENTIFICATION_REFERENCE,
+  label:           'Courier Status Details',
+  position:        10
+  } ]
+
+  @UI: { lineItem:       [ { position: 10,label: 'Tracking ID'} ],
+         identification: [ { position: 10, label: 'Tracking ID' } ] }
+
+  TrackingID;
+  @UI: { lineItem:       [ { position: 20,label: 'Branch ID'} ],
+     identification: [ { position: 20, label: 'Branch ID' } ] }
+  BranchiID;
+  @UI: { lineItem:       [ { position: 30,label: 'Employee ID'} ],
+     identification: [ { position: 30, label: 'Employee ID' } ] }
+  EmpID;
+  //          @UI: { lineItem:       [ { position: 30,label: 'Contr'} ],
+  //         identification: [ { position: 30, label: 'Contr' } ] }
+  //    Contr;
+  //
+  @UI: { lineItem:       [ { position: 40,label: 'Date'} ],
+     identification: [ { position: 40, label: 'Date' } ] }
+  ZDate;
+  @UI: { lineItem:       [ { position: 50,label: 'Time'} ],
+     identification: [ { position: 50, label: 'Time' } ] }
+  Time;
+  @UI: { lineItem:       [ { position: 60,label: 'Source'} ],
+     identification: [ { position: 60, label: 'Source' } ] }
+  Sourc;
+  @UI: { lineItem:       [ { position: 70,label: 'Destination'} ],
+     identification: [ { position: 70, label: 'Destination' } ] }
+  Desti;
+  @UI: { lineItem:       [ { position: 80,label: 'Status'} ],
+     identification: [ { position: 80, label: 'Status' } ] }
+  Stats;
+    
+}

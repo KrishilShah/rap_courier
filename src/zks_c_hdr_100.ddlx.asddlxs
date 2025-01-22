@@ -1,0 +1,97 @@
+@Metadata.layer: #PARTNER
+@UI.headerInfo: {
+typeName: 'Tracking Order',
+typeNamePlural: 'Tracking Orders',
+
+title:{
+type: #STANDARD,
+value: 'TrackingID'},
+
+description: {
+type: #STANDARD,
+value: 'Status'
+}
+}
+annotate entity ZKS_C_HDR_100
+    with 
+    
+{
+  @UI.facet: [
+  { 
+    id:'TrackingID',
+    purpose:         #STANDARD,
+    type:            #IDENTIFICATION_REFERENCE,
+    label:           'Courier Details',
+    position:        10
+   },
+   {
+     id: 'EmpItem',
+     type: #LINEITEM_REFERENCE,
+     label: 'Employee Details ',
+     purpose : #STANDARD,
+     targetElement: '_crrempinfo',
+     position: 10
+
+  },
+  {
+    id: 'StsItem',
+    type: #LINEITEM_REFERENCE,
+    label: 'Courier Status Details ',
+    purpose : #STANDARD,
+    targetElement: '_crrstsinfo',
+    position: 20 
+    } ]
+     @UI: { lineItem:       [ { position: 10,label: 'Tracking ID', importance: #HIGH } ],
+         identification: [ { position: 10, label: 'Tracking ID' } ] }
+    @UI.selectionField: [{  position : 10 }]
+
+  TrackingID;
+   @UI: { lineItem:       [ { position: 20,label: 'Branch ID', importance: #HIGH } ],
+      identification: [ { position: 20, label: 'Branch ID' } ] }
+
+  //  @UI.fieldGroup: [{ qualifier : 'Fieldgroup1' , position : 10 }]
+    
+  @Search.defaultSearchElement: true
+
+  BranchID;
+  @UI: { lineItem:       [ { position: 30,label: 'Customer ID', importance: #HIGH } ],
+  identification: [ { position: 30, label: 'Customer ID' } ] }
+
+  //   @UI.fieldGroup: [{ qualifier : 'Fieldgroup1' , position : 10 }]
+
+      
+   @Consumption.valueHelpDefinition:[ { entity :
+   { name : 'ZKRIS_F4_CSTID' , element :'Cstid' },
+   additionalBinding: [{ localElement: 'BranchID' , element: 'Brnid' }]
+      } ]
+  CustomerID;
+  @UI: { lineItem:       [ { position: 40,label: 'Source', importance: #HIGH } ],
+  identification: [ { position: 40, label: 'Source' } ] }
+  //     @UI.fieldGroup: [{ qualifier : 'Fieldgroup2' , position : 20 }]
+      @Consumption.valueHelpDefinition:[ { entity :
+          { name : 'ZKRIS_F4_BRNID' , element :'Brnid' }
+      } ]
+
+  Source;
+  @UI: { lineItem:       [ { position: 50,label: 'Destination', importance: #HIGH } ],
+  identification: [ { position: 50, label: 'Destination' } ] }
+  //     @UI.fieldGroup: [{ qualifier : 'Fieldgroup2' , position : 20 }]
+    @Consumption.valueHelpDefinition:[ { entity :
+          { name : 'ZKRIS_F4_BRNID' , element :'Brnid' }
+      } ]
+  Destination;
+
+  @UI: { lineItem:       [ { position: 70,label: 'Status', importance: #HIGH } ],
+  identification: [ { position: 70, label: 'Status' } ] }
+  //     @UI.fieldGroup: [{ qualifier : 'FieldGroup2' , position : 20 }]
+  Status;
+
+  @UI: { lineItem:       [ { position: 80,label: 'Price', importance: #HIGH } ],
+  identification: [ { position: 80, label: 'Price' } ] }
+  price;
+
+  @UI: { lineItem:       [ { position: 100,label: 'Weight', importance: #HIGH } ],
+  identification: [ { position: 100, label: 'Weight' } ] }
+  Weight;
+    
+}

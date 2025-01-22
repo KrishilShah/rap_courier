@@ -1,0 +1,37 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZKS_C_HDR_100 alias Header
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _crrempinfo { create; with draft; }
+  use association _crrstsinfo { create; with draft; }
+}
+
+define behavior for ZKS_C_EMP_100 alias Employee
+{
+  use update;
+  use delete;
+
+  use association _crrheaderinfo { with draft; }
+}
+
+define behavior for ZKS_C_STS_100 alias Status
+{
+
+
+  use update;
+  use delete;
+
+  use association _crrheaderinfo { with draft; }
+}

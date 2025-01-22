@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Def of Header'
+define service ZKS_UI_CRR_100 {
+  expose ZKS_C_HDR_100 as Header;
+  expose ZKS_C_EMP_100 as Employee;
+  expose ZKS_C_STS_100 as Status;
+}

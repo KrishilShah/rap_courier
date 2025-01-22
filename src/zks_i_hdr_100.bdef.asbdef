@@ -1,0 +1,113 @@
+unmanaged implementation in class zbp_ks_i_hdr_100 unique;
+strict ( 2 ); // system will check std guildlines ( never cmt out )
+
+with draft;
+
+define behavior for ZKS_I_HDR_100 alias Header
+draft table zks_d_crr_hdr
+
+//late numbering
+early numbering
+lock master
+total etag lastchangedat
+authorization master ( instance )
+etag master lastchangedat
+{
+  create;
+  update (features : instance);
+  delete (features : instance);
+
+  field ( readonly ) TrackingID ,Status;
+  association _crrempinfo { create; with draft; }
+  association _crrstsinfo { create; with draft; }
+
+
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+
+  draft determine action Prepare;
+
+   mapping for zks_crr_hdr control zks_s_crr_hdr
+  {
+    TrackingID = trnid;
+    BranchID = brnid;
+    CustomerID = cstid;
+    Source = sourc;
+    Destination = desti;
+    Status = stats;
+    cuky = cuky;
+    unit = unit;
+    price = price;
+    Weight = weigt;
+    locallastchangedat = locallastchangedat;
+    lastchangedat = lastchangedat;
+    aedat = aedat;
+    aenam = aenam ;
+    aezet = aezet;
+    ernam = ernam;
+    erdat =  erdat;
+    erzet = erzet ;
+  }
+
+
+
+}
+
+define behavior for ZKS_I_EMP_100 alias Employee
+draft table zks_d_crr_emp
+//late numbering
+early numbering
+lock dependent by _crrheaderinfo
+authorization dependent by _crrheaderinfo
+etag dependent by _crrheaderinfo
+{
+  update (features : instance);
+  delete (features : instance);
+  field ( readonly )  TrackingID ,Name ,Phone ,Role ,Email  ;
+  association _crrheaderinfo{with draft;}
+
+  mapping for zks_crr_emap
+  {
+    EmployeeID = empid;
+    TrackingID = trnid;
+    BranchID = brnid;
+    Name = name;
+    Role = role;
+    Phone = phone;
+    Email = email;
+    Asign = asign;
+  }
+}
+
+define behavior for ZKS_I_STS_100 alias Status
+draft table zks_d_crr_sts
+//late numbering
+early numbering
+lock dependent by _crrheaderinfo
+authorization dependent by _crrheaderinfo
+etag dependent by _crrheaderinfo
+{
+
+
+  update (features : instance);
+  delete (features : instance);
+  field ( readonly ) TrackingID, Contr;
+  association _crrheaderinfo{with draft;}
+
+  mapping for ZKS_CRR_STS
+  {
+    TrackingID = trnid;
+    Contr = contr;
+    BranchiID = brnid;
+    EmpID = empid;
+    ZDate = zdate;
+    Time = ztime;
+    Sourc = sourc;
+    Desti = desti;
+    Stats = stats;
+    tindx = tindx;
+  }
+}
